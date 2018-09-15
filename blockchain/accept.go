@@ -80,7 +80,6 @@ func (b *BlockChain) maybeAcceptBlock(block *bchutil.Block, flags BehaviorFlags)
 	if err != nil {
 		return false, err
 	}
-
 	// Notify the caller that the new block was accepted into the block
 	// chain.  The caller would typically want to react by relaying the
 	// inventory to other peers.
