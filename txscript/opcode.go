@@ -736,9 +736,9 @@ func (pop *parsedOpcode) print(oneline bool) string {
 	// opcodes in question when the oneline flag is set.
 	opcodeName := pop.opcode.name
 	if oneline {
-		if replName, ok := opcodeOnelineRepls[opcodeName]; ok {
+		/*if replName, ok := opcodeOnelineRepls[opcodeName]; ok {
 			opcodeName = replName
-		}
+		}*/
 
 		// Nothing more to do for non-data push opcodes.
 		if pop.opcode.length == 1 {
@@ -2852,7 +2852,7 @@ func opcodeCheckDataSig(op *parsedOpcode, vm *Engine) error {
 		vm.sigChecks++
 
 		if !valid && vm.hasFlag(ScriptVerifyNullFail) {
-			str := "signature not empty on failed checksig"
+			str := "signature not empty on failed checkdatasig"
 			return scriptError(ErrNullFail, str)
 		}
 	}

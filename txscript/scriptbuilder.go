@@ -195,6 +195,12 @@ func (b *ScriptBuilder) AddData(data []byte) *ScriptBuilder {
 		return b
 	}
 
+	// Fast path for 0x00 which otherwise gets incorrectly translated later.
+	if len(data) == 1 && data[0] == 0 {
+		b.script = append(b.script, OP_DATA_1, 0x00)
+		return b
+	}
+
 	// Pushes that would cause the script to exceed the largest allowed
 	// script size would result in a non-canonical script.
 	dataSize := canonicalDataSize(data)

@@ -478,6 +478,12 @@ func (vm *Engine) subScript() []parsedOpcode {
 	return vm.scripts[vm.scriptIdx][vm.lastCodeSep:]
 }
 
+// SubScript returns the script bytes since the last OP_CODESEPARATOR.
+func (vm *Engine) SubScript() []byte {
+	scriptBytes, _ := unparseScript(vm.subScript())
+	return scriptBytes
+}
+
 // checkHashTypeEncoding returns whether or not the passed hashtype adheres to
 // the strict encoding requirements if enabled.
 func (vm *Engine) checkHashTypeEncoding(hashType SigHashType) error {
